@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EduGenie — Sign in or create an account.">
+    <title>EduGenie — Sign In</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="auth-page">
+
+    <div class="auth-container">
+
+        <div class="auth-brand">
+            <div class="auth-logo">Edu<span>Genie</span></div>
+            <div class="auth-tagline">Your AI-powered study assistant</div>
+        </div>
+
+        <div class="auth-card">
+
+            <!-- Tab switcher -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tab-login" onclick="showTab('login')">Sign In</button>
+                <button class="auth-tab" id="tab-signup" onclick="showTab('signup')">Create Account</button>
+            </div>
+
+            <!-- Error / success banner -->
+            <div class="auth-banner" id="auth-banner" style="display:none;"></div>
+
+            <!-- ── Login form ── -->
+            <form class="auth-form" id="form-login" onsubmit="handleLogin(event)">
+                <div class="input-group">
+                    <label class="input-label" for="login-identifier">Username or Email</label>
+                    <input class="input-field" type="text" id="login-identifier"
+                           placeholder="you@example.com" autocomplete="username" required>
+                </div>
+                <div class="input-group">
+                    <label class="input-label" for="login-password">Password</label>
+                    <input class="input-field" type="password" id="login-password"
+                           placeholder="••••••••" autocomplete="current-password" required>
+                </div>
+                <button class="btn-submit auth-btn" type="submit" id="btn-login">
+                    <span>Sign In</span>
+                </button>
+            </form>
+
+            <!-- ── Signup form ── -->
+            <form class="auth-form" id="form-signup" style="display:none;" onsubmit="handleSignup(event)">
+                <div class="input-group">
+                    <label class="input-label" for="signup-username">Username</label>
+                    <input class="input-field" type="text" id="signup-username"
+                           placeholder="studygenie42" autocomplete="username"
+                           minlength="3" maxlength="64" required>
+                </div>
+                <div class="input-group">
+                    <label class="input-label" for="signup-email">Email</label>
+                    <input class="input-field" type="email" id="signup-email"
+                           placeholder="you@example.com" autocomplete="email" required>
+                </div>
+                <div class="input-group">
+                    <label class="input-label" for="signup-password">Password <small style="font-weight:400;color:var(--text-muted)">(min 6 chars)</small></label>
+                    <input class="input-field" type="password" id="signup-password"
+                           placeholder="••••••••" autocomplete="new-password"
+                           minlength="6" required>
+                </div>
+                <button class="btn-submit auth-btn" type="submit" id="btn-signup">
+                    <span>Create Account</span>
+                </button>
+            </form>
+
+        </div>
+
+        <div class="auth-footer">EduGenie &copy; 2026</div>
+    </div>
+
+    <script>
+        const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+            ? 'http://localhost:8000/api'
+            : '/api';
+
+        // If already logged in, go straight to app
+        if (localStorage.getItem('edugenie_token')) {
+            location.href = '/';
+        }
+
+        function showTab(tab) {
+            document.getElementById('form-login').style.display  = tab === 'login'  ? '' : 'none';
+            document.getElementById('form-signup').style.display = tab === 'signup' ? '' : 'none';
+            document.getElementById('tab-login').classList.toggle('active',  tab === 'login');
+            document.getElementById('tab-signup').classList.toggle('active', tab === 'signup');
+            hideBanner();
+        }
+
+        function showBanner(msg, isError = true) {
+            const b = document.getElementById('auth-banner');
+            b.textContent = msg;
+            b.className = 'auth-banner ' + (isError ? 'auth-banner-error' : 'auth-banner-success');
+            b.style.display = 'block';
+        }
+
+        function hideBanner() {
+            document.getElementById('auth-banner').style.display = 'none';
+        }
+
+        function setButtonLoading(btnId, loading) {
+            const btn = document.getElementById(btnId);
+            btn.disabled = loading;
+            btn.querySelector('span').textContent = loading ? 'Please wait…' : (btnId === 'btn-login' ? 'Sign In' : 'Create Account');
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            hideBanner();
+            setButtonLoading('btn-login', true);
+            try {
+                const resp = await fetch(API_BASE + '/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username_or_email: document.getElementById('login-identifier').value.trim(),
+                        password: document.getElementById('login-password').value,
+                    }),
+                });
+                const data = await resp.json();
+                if (!resp.ok) {
+                    showBanner(data.error || 'Login failed.');
+                    return;
+                }
+                localStorage.setItem('edugenie_token', data.token);
+                localStorage.setItem('edugenie_user', JSON.stringify(data.user));
+                location.href = '/';
+            } catch (err) {
+                showBanner('Network error. Is the server running?');
+            } finally {
+                setButtonLoading('btn-login', false);
+            }
+        }
+
+        async function handleSignup(e) {
+            e.preventDefault();
+            hideBanner();
+            setButtonLoading('btn-signup', true);
+            try {
+                const resp = await fetch(API_BASE + '/auth/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        username: document.getElementById('signup-username').value.trim(),
+                        email: document.getElementById('signup-email').value.trim(),
+                        password: document.getElementById('signup-password').value,
+                    }),
+                });
+                const data = await resp.json();
+                if (!resp.ok) {
+                    showBanner(data.error || 'Signup failed.');
+                    return;
+                }
+                localStorage.setItem('edugenie_token', data.token);
+                localStorage.setItem('edugenie_user', JSON.stringify(data.user));
+                location.href = '/';
+            } catch (err) {
+                showBanner('Network error. Is the server running?');
+            } finally {
+                setButtonLoading('btn-signup', false);
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+/*
+ * EduGenie — Design Tokens
+ * =========================
+ *
+ * VISUAL DIRECTION:
+ * Space Grotesk was chosen for headings because it's a geometric grotesque
+ * with a technical, architectural quality — sharp letterforms with open
+ * apertures that feel precise and scholarly without the overused friendliness
+ * of Inter/Poppins. It reads as "engineered knowledge" rather than "generic
+ * SaaS." Body text uses the system sans-serif stack for fast rendering and
+ * native familiarity — the headings carry the personality, the body stays
+ * invisible. The color palette is built around deep navy (authority, depth)
+ * and warm amber (energy, highlight) on an off-white paper tone — think
+ * chalkboard-and-ink rather than neon-and-glass. Flat design with ruled
+ * borders replaces drop-shadow card grids to keep the layout structured
+ * and editorial.
+ *
+ * FONT: Space Grotesk (Google Fonts) — geometric grotesque, technical feel
+ * PAIR: System sans-serif stack — invisible, fast, native
+ * PALETTE: Navy + Amber + Paper — grounded, educational, not SaaS
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+    /* ── Typography ────────────────────────────────────────────────────── */
+    --font-display: 'Space Grotesk', system-ui, sans-serif;
+    --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    --font-mono: 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+
+    /* Type scale — based on 1.25 ratio (Major Third) */
+    --text-xs:   0.75rem;    /* 12px */
+    --text-sm:   0.875rem;   /* 14px */
+    --text-base: 1rem;       /* 16px */
+    --text-md:   1.125rem;   /* 18px */
+    --text-lg:   1.25rem;    /* 20px */
+    --text-xl:   1.5rem;     /* 24px */
+    --text-2xl:  1.875rem;   /* 30px */
+    --text-3xl:  2.25rem;    /* 36px */
+    --text-4xl:  3rem;       /* 48px */
+
+    --weight-regular: 400;
+    --weight-medium:  500;
+    --weight-semi:    600;
+    --weight-bold:    700;
+
+    --leading-tight:  1.2;
+    --leading-normal: 1.5;
+    --leading-loose:  1.75;
+
+    /* ── Colors ────────────────────────────────────────────────────────── */
+
+    /* Primary: Deep Navy — authority, depth, the "chalkboard" */
+    --navy-950: #0d1117;
+    --navy-900: #131a24;
+    --navy-800: #1a2332;
+    --navy-700: #243044;
+    --navy-600: #2f3f58;
+    --navy-500: #3d506d;
+
+    /* Accent: Warm Amber — energy, highlight, the "chalk mark" */
+    --amber-500: #d4913b;
+    --amber-400: #e0a455;
+    --amber-300: #eabd7a;
+    --amber-600: #b87a2e;
+    --amber-700: #965f1e;
+
+    /* Neutral: Paper tones — warm off-whites */
+    --paper-50:  #faf8f5;
+    --paper-100: #f4f1eb;
+    --paper-200: #e8e3da;
+    --paper-300: #d4cfc4;
+    --paper-400: #b8b2a5;
+    --paper-500: #9c9588;
+    --paper-600: #736d62;
+
+    /* Semantic */
+    --color-success: #3a7d44;
+    --color-error:   #c43e3e;
+    --color-warning: #c49a3e;
+    --color-info:    #3e7ec4;
+
+    /* Surface colors */
+    --surface-primary:   var(--paper-50);
+    --surface-secondary: var(--paper-100);
+    --surface-sidebar:   var(--navy-900);
+    --surface-input:     #ffffff;
+    --surface-overlay:   rgba(13, 17, 23, 0.6);
+
+    /* Text colors */
+    --text-primary:   var(--navy-900);
+    --text-secondary: var(--navy-600);
+    --text-muted:     var(--paper-500);
+    --text-inverse:   var(--paper-100);
+    --text-accent:    var(--amber-600);
+
+    /* Border */
+    --border-light:  var(--paper-200);
+    --border-medium: var(--paper-300);
+    --border-dark:   var(--navy-700);
+    --border-accent: var(--amber-500);
+
+    /* ── Spacing ───────────────────────────────────────────────────────── */
+    /* 4px base unit */
+    --space-1:  0.25rem;   /*  4px */
+    --space-2:  0.5rem;    /*  8px */
+    --space-3:  0.75rem;   /* 12px */
+    --space-4:  1rem;      /* 16px */
+    --space-5:  1.25rem;   /* 20px */
+    --space-6:  1.5rem;    /* 24px */
+    --space-8:  2rem;      /* 32px */
+    --space-10: 2.5rem;    /* 40px */
+    --space-12: 3rem;      /* 48px */
+    --space-16: 4rem;      /* 64px */
+    --space-20: 5rem;      /* 80px */
+
+    /* ── Layout ────────────────────────────────────────────────────────── */
+    --sidebar-width: 260px;
+    --content-max-width: 720px;
+    --border-radius-sm: 4px;
+    --border-radius-md: 6px;
+    --border-radius-lg: 8px;
+
+    /* ── Transitions ───────────────────────────────────────────────────── */
+    --transition-fast: 120ms ease;
+    --transition-base: 200ms ease;
+    --transition-slow: 350ms ease;
+}

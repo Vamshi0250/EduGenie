@@ -1,0 +1,17 @@
+fastapi==0.115.0
+uvicorn[standard]==0.30.0
+google-generativeai==0.8.0
+google-api-core==2.19.1
+python-dotenv==1.0.1
+sqlalchemy==2.0.35
+pytest==8.3.3
+httpx==0.27.2
+jinja2==3.1.4
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.32
+# LaMini-Flan-T5-783M local model dependencies (Task 5)
+# torch is CPU-only here — install GPU version separately if needed.
+transformers==4.44.2
+torch==2.4.1
+sentencepiece==0.2.0
+accelerate==0.34.2

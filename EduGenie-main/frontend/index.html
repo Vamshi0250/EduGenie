@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EduGenie — Educational assistant. Ask questions, generate quizzes, get explanations, summarize text, and discover learning paths.">
+    <title>EduGenie — Educational Assistant</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- ── Sidebar ─────────────────────────────────────────────────── -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">Edu<span>Genie</span></div>
+            <div class="sidebar-subtitle">Study Assistant</div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <div class="sidebar-label">Features</div>
+
+            <div class="nav-item active" data-task="ask" id="nav-ask">
+                <span class="nav-label">Ask</span>
+                <span>Ask a Question</span>
+            </div>
+
+            <div class="nav-item" data-task="explain" id="nav-explain">
+                <span class="nav-label">Explain</span>
+                <span>Explain Concept</span>
+            </div>
+
+            <div class="nav-item" data-task="quiz" id="nav-quiz">
+                <span class="nav-label">Quiz</span>
+                <span>Generate Quiz</span>
+            </div>
+
+            <div class="nav-item" data-task="summarize" id="nav-summarize">
+                <span class="nav-label">Summarize</span>
+                <span>Summarize Text</span>
+            </div>
+
+            <div class="nav-item" data-task="recommend" id="nav-recommend">
+                <span class="nav-label">Path</span>
+                <span>Learning Path</span>
+            </div>
+
+            <div class="sidebar-label" style="margin-top: var(--space-4);">Activity</div>
+
+            <div class="nav-item" data-task="history" id="nav-history">
+                <span class="nav-label">History</span>
+                <span>History</span>
+            </div>
+        </nav>
+
+        <div class="sidebar-footer">
+            EduGenie &copy; 2026
+        </div>
+    </aside>
+
+    <!-- ── Main Content ────────────────────────────────────────────── -->
+    <main class="main-content">
+
+        <div class="content-header">
+            <h1 id="content-title">Ask a Question</h1>
+            <p id="content-desc">Get a clear, educational answer to any question.</p>
+        </div>
+
+        <div class="content-body">
+
+            <!-- Dynamic form area -->
+            <section class="input-section" id="form-container">
+                <!-- Populated by JS -->
+            </section>
+
+            <!-- Loading indicator — typing dots, not a spinner -->
+            <div class="loading-indicator" id="loading-indicator">
+                <div class="loading-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <span>EduGenie is thinking…</span>
+            </div>
+
+            <!-- Results -->
+            <section class="results-section">
+                <div class="results-panel" id="results-panel" style="display: none;">
+                    <div class="results-header" id="results-header">Result</div>
+                    <div class="results-body" id="results-body"></div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

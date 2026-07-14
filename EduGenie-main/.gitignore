@@ -1,0 +1,59 @@
+# EduGenie — AI-Powered Educational Assistant
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+*.whl
+venv/
+env/
+.venv/
+pip-log.txt
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Environment — NEVER commit real secrets
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Database files — contain live user data
+*.db
+*.sqlite3
+
+# Runtime data files — contain live user interactions, not for version control
+data/
+
+# Security / scan reports — contain internal details
+edugenie-full-scan-report.json
+scan_edugenie.py
+
+# Testing artifacts
+.pytest_cache/
+htmlcov/
+.coverage
+coverage.xml
+
+# OS
+Desktop.ini
+ehthumbs.db

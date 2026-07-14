@@ -1,0 +1,24 @@
+services:
+  # --- Backend (FastAPI) ---
+  - type: web
+    name: edugenie-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false  # Must be set manually in Render dashboard
+      - key: PYTHON_VERSION
+        value: "3.11.0"
+
+  # --- Frontend (Static Site) ---
+  - type: web
+    name: edugenie-frontend
+    runtime: static
+    buildCommand: echo "No build needed"
+    staticPublishPath: ./frontend
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
